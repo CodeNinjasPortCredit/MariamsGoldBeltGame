@@ -17,8 +17,8 @@ public class Laser : MonoBehaviour
     {
         if (other.tag == "Player")
         {
-            SceneManager.LoadScene("Game Over");
+            SceneManager.LoadScene(4);
         }
     }
-    }
+}
 

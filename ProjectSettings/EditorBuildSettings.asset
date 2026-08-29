@@ -15,8 +15,11 @@ EditorBuildSettings:
     path: Assets/Scenes/New Gameplay.unity
     guid: cd97e52425ec42649ab2b2f958488ebc
   - enabled: 1
-    path: Assets/Scenes/Game Over.unity
+    path: Assets/Scenes/Game Over (caught).unity
     guid: ad6634b66752b2d4982d2b178689eb62
+  - enabled: 1
+    path: Assets/Scenes/Lazer Game Over.unity
+    guid: eba691296195a4f469d56c78786bcefe
   - enabled: 1
     path: Assets/Scenes/Win.unity
     guid: 35e83fae2275ed64fa2ae1c9d5e8ee7b

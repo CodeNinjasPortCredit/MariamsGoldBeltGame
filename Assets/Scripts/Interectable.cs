@@ -40,6 +40,15 @@ public class Interectable : MonoBehaviour
         {
             Debug.DrawRay(head.position, transform.TransformDirection(Vector3.forward) * maxDistance, Color.red);
             RaycastHit hit;
+            Vector3 rayOrigin = new Vector3(0.5f, 0.5f, 0f); // center of the screen
+            float rayLength = distance;
+
+            // actual Ray
+            Ray ray = Camera.main.ViewportPointToRay(rayOrigin);
+
+            // debug Ray
+            Debug.DrawRay(ray.origin, ray.direction * rayLength, Color.red);
+
             if (Physics.SphereCast(head.position, radius, transform.TransformDirection(Vector3.forward), out hit, maxDistance, layerMask[0]))
             {
                 // Debug.Log("Found an envelope!");
