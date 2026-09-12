@@ -8,7 +8,7 @@ using UnityEngine.UI;
 
 public class Keypad : MonoBehaviour
 {
-    private string Answer = "3749";
+    private string Answer = "6653";
 
     [SerializeField] private TMP_InputField Ans;
     [SerializeField] private Animator Door;
