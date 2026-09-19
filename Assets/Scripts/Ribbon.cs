@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Ribbon : MonoBehaviour
 {
+    public Timer timer;
 
     private Rigidbody rb;
  
@@ -12,6 +13,7 @@ public class Ribbon : MonoBehaviour
     {
         if (other.tag == "Player")
         {
+            timer.endTimer();
             SceneManager.LoadScene("Win");
         }
     }
