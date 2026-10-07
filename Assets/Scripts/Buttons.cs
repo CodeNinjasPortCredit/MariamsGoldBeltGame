@@ -20,4 +20,8 @@ public class Buttons : MonoBehaviour
         SceneManager.LoadScene("Start Scene");
     }
 
+    public void LoadLeaderboard()
+    {
+        SceneManager.LoadScene("Leaderboard");
+    }
 }

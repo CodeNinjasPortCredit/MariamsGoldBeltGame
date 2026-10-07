@@ -7,12 +7,12 @@ public class Timer : MonoBehaviour
 {
     [SerializeField] TextMeshProUGUI timerText;
     float elapsedTime;
-    bool stopTimer = false; 
+    bool stopTimer = false;
 
     // Update is called once per frame
     void Update()
     {
-        if (stopTimer) return; 
+        if (stopTimer) return;
 
         elapsedTime += Time.deltaTime;
         int minutes = Mathf.FloorToInt(elapsedTime / 60);
@@ -23,12 +23,22 @@ public class Timer : MonoBehaviour
     public void endTimer()
     {
         stopTimer = true;
-        if (elapsedTime < PlayerPrefs.GetFloat("ElapsedTime"))
+
+        // Save current run values
+        PlayerPrefs.SetFloat("CurrentElapsedTime", elapsedTime);
+        PlayerPrefs.SetString("CurrentScore", timerText.text);
+
+        // Get existing best (use a very large default if none exists)
+        float best = PlayerPrefs.GetFloat("BestElapsedTime", float.MaxValue);
+
+        // Lower time is better — update best if current is lower
+        if (elapsedTime < best)
         {
-            PlayerPrefs.SetFloat("ElapsedTime", elapsedTime);
+            PlayerPrefs.SetFloat("BestElapsedTime", elapsedTime);
             PlayerPrefs.SetString("HighScore", timerText.text);
         }
-        PlayerPrefs.SetString("CurrentScore", timerText.text);
+
+        PlayerPrefs.Save();
     }
 
 }

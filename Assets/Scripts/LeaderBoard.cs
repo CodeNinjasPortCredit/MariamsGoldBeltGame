@@ -1,7 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class LeaderBoard : MonoBehaviour
 {
@@ -15,18 +16,57 @@ public class LeaderBoard : MonoBehaviour
     [SerializeField]
     TMP_InputField myInput;
 
+    public GameObject HighScoreField;
+
+    // Run once when the leaderboard scene/obj becomes active
+    private void OnEnable()
+    {
+        GetLeaderboard();
+    }
+
     public void GetLeaderboard()
     {
-        textName.text = myInput.text;
+        // Show current player's formatted score string (saved by Timer)
+        score.text = PlayerPrefs.GetString("CurrentScore", "00:00");
 
-        // Set CURRENT player's score
-        score.text = PlayerPrefs.GetString("CurrentScore");
+        // Prefer the saved HighScore string; if missing, format BestElapsedTime
+        string highScoreString = PlayerPrefs.GetString("HighScore", string.Empty);
+        if (!string.IsNullOrEmpty(highScoreString))
+        {
+            highScore.text = highScoreString;
+        }
+        else
+        {
+            float best = PlayerPrefs.GetFloat("BestElapsedTime", float.MaxValue);
+            if (best == float.MaxValue)
+            {
+                highScore.text = "--:--";
+            }
+            else
+            {
+                int minutes = Mathf.FloorToInt(best / 60f);
+                int seconds = Mathf.FloorToInt(best % 60f);
+                highScore.text = string.Format("{0:00}:{1:00}", minutes, seconds);
+            }
+        }
 
-        // Set HIGH score and player's name
-        highScore.text = PlayerPrefs.SetFloat("ElapsedTime", );
+        // Determine whether the current run is a new best.
+        float current = PlayerPrefs.GetFloat("CurrentElapsedTime", float.MaxValue);
+        float bestTime = PlayerPrefs.GetFloat("BestElapsedTime", float.MaxValue);
 
-        // If player's current score is NOT greater than high score, do NOT show name field
+        // Show name input if current run is a new best (lower time is better)
+        HighScoreField.SetActive(current <= bestTime);
 
-
+        // Populate name display with the input value (or any previously saved name)
+        string savedName = PlayerPrefs.GetString("HighScoreName", string.Empty);
+        if (!string.IsNullOrEmpty(savedName))
+        {
+            textName.text = savedName;
+            myInput.text = savedName;
+        }
+        else
+        {
+            textName.text = myInput.text;
+        }
     }
 }
