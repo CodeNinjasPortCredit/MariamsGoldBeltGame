@@ -8,19 +8,35 @@ public class Chase : MonoBehaviour
     public Transform Player;
 
     private NavMeshAgent Agent;
-         
-    // Start is called before the first frame update
-    void Start()
+    public Animator animator;
+   
+    void OnTriggerEnter(Collider other)
     {
-        Agent = GetComponent<NavMeshAgent>();
-        // Agent.SetDestination(Player.position);
+        if (other.tag == "Player")
+        {
+            Agent = GetComponent<NavMeshAgent>();
+            Agent.SetDestination(Player.position);
+            animator.SetTrigger("withInRange");
+        }
     }
 
-    // Update is called once per frame
-    void Update()
+    private void OnTriggerStay(Collider other)
     {
-        // Agent.destination = Player.position;
+        if (other.tag == "Player")
+        {
+            Agent.SetDestination(Player.position);
+            animator.SetTrigger("withInRange");
+        }
     }
-    
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            animator.SetTrigger("outOfRange");
+            Agent.ResetPath();
+
+        }
+    }
 
 }

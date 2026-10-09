@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Cinemachine;
+using TMPro;
 
 public class Buttons : MonoBehaviour
 {
@@ -20,6 +21,10 @@ public class Buttons : MonoBehaviour
     public GameObject StartButton;
 
     public GameObject Guard;
+
+    public GameObject ReminderName;
+
+    public TMP_InputField playerNameInputField;
     public void LoadMenu()
     {
         SceneManager.LoadScene("Menu");
@@ -46,6 +51,10 @@ public class Buttons : MonoBehaviour
 
     // Newly Added
     public void StartGameplay() {
+        if (playerNameInputField.text == "")
+        {
+            ReminderName.SetActive(true);
+        }
         HintPanel.SetActive(true);
         gameplayCamera.Follow = BobBody.transform;
         TimerText.SetActive(true);
