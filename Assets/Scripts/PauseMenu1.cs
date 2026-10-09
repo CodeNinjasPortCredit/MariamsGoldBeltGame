@@ -48,6 +48,8 @@ public class PauseMenu1 : MonoBehaviour
     public void Exit()
     {
         Time.timeScale = 1f;
-        SceneManager.LoadScene(0);
+        // Finalize this: Either load the gameplay directly or the start scene
+        // SceneManager.LoadScene(0);
+        SceneManager.LoadScene("New Gameplay (Jacky)");
     }
 }

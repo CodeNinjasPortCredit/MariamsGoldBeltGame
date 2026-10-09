@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class Interectable : MonoBehaviour
 {
+    public CinemachineVirtualCamera vcam;
     public Transform head;
 
     [Header("Max Distance of the RayCast")]
@@ -64,7 +66,7 @@ public class Interectable : MonoBehaviour
             }
             else if (Physics.SphereCast(head.position, radius, transform.TransformDirection(Vector3.forward), out hit, maxDistance, layerMask[1]))
             {
-                Debug.Log("Detected " + hit.collider.name);
+                // Debug.Log("Detected " + hit.collider.name);
                 if (!inventory_manager.HasItem("Wrench"))
                 {
                     reminder.text = "Find the Wrench to open the Bar.";
