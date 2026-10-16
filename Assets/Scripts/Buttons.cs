@@ -20,6 +20,8 @@ public class Buttons : MonoBehaviour
     public GameObject MenuButton;
     public GameObject StartButton;
 
+    public Interectable interactable;
+
     public GameObject Guard;
 
     public GameObject ReminderName;
@@ -61,5 +63,6 @@ public class Buttons : MonoBehaviour
         MenuButton.SetActive(false);
         StartButton.SetActive(false);  
         Guard.SetActive(false);
+        interactable.started = true;
     }
 }

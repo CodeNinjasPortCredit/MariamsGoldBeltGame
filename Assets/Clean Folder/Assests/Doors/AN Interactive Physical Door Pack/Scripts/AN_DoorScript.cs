@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class AN_DoorScript : MonoBehaviour
 {
+    public GameObject Door;
     [Tooltip("If it is false door can't be used")]
     public bool Locked = false;
     [Tooltip("It is true for remote control only")]
@@ -75,6 +76,7 @@ public class AN_DoorScript : MonoBehaviour
             else if (!isOpened && CanOpen && !RedLocked && !BlueLocked)
             {
                 Debug.Log("Opening Door :)");
+                Door.SetActive(false);
                 isOpened = true;
                 rbDoor.AddRelativeTorque(Vector3.forward * 500f, ForceMode.Impulse); 
             }

@@ -20,6 +20,12 @@ namespace StarterAssets
         [Tooltip("Move speed of the character in m/s")]
         public float MoveSpeed = 2.0f;
 
+        [Tooltip("Move speed of the character in m/s")]
+        public float MoveSpeedDefault = 2.0f;
+
+        [Tooltip("Move speed of the character in m/s")]
+        public float CrawlSpeed = 2.0f;
+
         [Tooltip("Sprint speed of the character in m/s")]
         public float SprintSpeed = 5.335f;
 
@@ -56,7 +62,7 @@ namespace StarterAssets
         public float GroundedOffset = -1f;
 
         [Tooltip("The radius of the grounded check. Should match the radius of the CharacterController")]
-        public float GroundedRadius = 0.28f;
+        public float GroundedRadius = 0.4f;
 
         [Tooltip("What layers the character uses as ground")]
         public LayerMask GroundLayers;
@@ -219,20 +225,26 @@ namespace StarterAssets
             {
                 _animator.SetBool("Crawl", true);
                 gameObject.GetComponent<CharacterController>().center = new Vector3(0, 0.48f, 0);
-                gameObject.GetComponent<CharacterController>().radius = 0.28f;
+                gameObject.GetComponent<CharacterController>().radius = 0.18f;
                 gameObject.GetComponent<CharacterController>().height = 0.45f;
-                MoveSpeed = 20;
+                MoveSpeed = CrawlSpeed;
             }
             else if (!Input.GetKey(KeyCode.C))
             {
                 _animator.SetBool("Crawl", false);
-                gameObject.GetComponent<CharacterController>().center = new Vector3(0, 1.16f, 0);
-                gameObject.GetComponent<CharacterController>().radius = 0.28f;
-                gameObject.GetComponent<CharacterController>().height = 2.7f;
-                MoveSpeed = 60;
+                gameObject.GetComponent<CharacterController>().center = new Vector3(0, 1f, 0);
+                gameObject.GetComponent<CharacterController>().radius = 0.18f;
+                gameObject.GetComponent<CharacterController>().height = 2f;
+                MoveSpeed = MoveSpeedDefault;
             }
             // set target speed based on move speed, sprint speed and if sprint is pressed
-            float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+            float targetSpeed = 0;
+            if (!Input.GetKey(KeyCode.C))
+            {
+                targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+            } else {
+                targetSpeed = MoveSpeed;
+            }
 
             // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 

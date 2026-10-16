@@ -35,9 +35,15 @@ public class Interectable : MonoBehaviour
 
     public float radius;
 
+    public bool started = false;
+
     // Update is called once per frame
     void Update()
     {
+        if (!started) {
+            reminder.text = "";
+            return;
+        }
         if (transform.tag == "MainCamera")
         {
             Debug.DrawRay(head.position, transform.TransformDirection(Vector3.forward) * maxDistance, Color.red);
@@ -103,8 +109,8 @@ public class Interectable : MonoBehaviour
                 {
                     if (hit.collider.gameObject.transform.parent.gameObject.name == "Door1")
                     {
-                        hit.collider.gameObject.transform.parent.gameObject.GetComponent<Animator>().SetBool("Open", true);
-                        hit.collider.gameObject.layer = LayerMask.NameToLayer("Default");
+                        // Newley added code to open the door
+                        hit.collider.gameObject.SetActive(false);
 
                     }
                 }
@@ -112,9 +118,8 @@ public class Interectable : MonoBehaviour
                 {
                     if (hit.collider.gameObject.transform.parent.gameObject.name == "Door2")
                     {
-                        hit.collider.gameObject.transform.parent.gameObject.GetComponent<Animator>().SetBool("Open", true);
-                        hit.collider.gameObject.layer = LayerMask.NameToLayer("Default");
-
+                        // Newley added code to open the door
+                        hit.collider.gameObject.SetActive(false);   
                     }
                 }
                 else if (inventory_manager.HasItem("Key") && hit.collider.gameObject.transform.parent.gameObject.name == "Door")
@@ -168,8 +173,7 @@ public class Interectable : MonoBehaviour
                 {
                     if (hit.collider.gameObject.transform.parent.gameObject.name == "Door")
                     {
-                        hit.collider.gameObject.transform.parent.gameObject.GetComponent<Animator>().SetBool("Open", true);
-                        hit.collider.gameObject.layer = LayerMask.NameToLayer("Default");
+                        hit.collider.gameObject.SetActive(false);
                     }
                 }
             }
