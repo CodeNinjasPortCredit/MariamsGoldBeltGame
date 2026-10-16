@@ -26,8 +26,7 @@ public class Buttons : MonoBehaviour
 
     public GameObject ReminderName;
 
-    public TMP_InputField playerNameInputField;
-    public void LoadMenu()
+       public void LoadMenu()
     {
         SceneManager.LoadScene("Menu");
     }
@@ -53,10 +52,7 @@ public class Buttons : MonoBehaviour
 
     // Newly Added
     public void StartGameplay() {
-        if (playerNameInputField.text == "")
-        {
-            ReminderName.SetActive(true);
-        }
+      
         HintPanel.SetActive(true);
         gameplayCamera.Follow = BobBody.transform;
         TimerText.SetActive(true);
