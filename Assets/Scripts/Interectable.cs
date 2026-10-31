@@ -38,6 +38,13 @@ public class Interectable : MonoBehaviour
     public bool started = false;
 
     // Update is called once per frame
+
+    public void TurnOffKeyPad()
+    {
+        keypad.SetActive(false);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
     void Update()
     {
         if (!started) {
@@ -103,7 +110,7 @@ public class Interectable : MonoBehaviour
                 if (!inventory_manager.HasItem("Key") && hit.collider.gameObject.transform.parent.gameObject.name == "Door")
                 {
                     reminder.text = "Find the Key to open the Door.";
-                    keypad.SetActive(false);
+                    TurnOffKeyPad(); 
                 }
                 if (Input.GetKeyDown(KeyCode.E) && inventory_manager.HasItem("BlackKey"))
                 {
@@ -130,7 +137,7 @@ public class Interectable : MonoBehaviour
                 if (!inventory_manager.HasItem("BlackKey") && hit.collider.gameObject.transform.parent.gameObject.name == "Door1")
                 {
                     reminder.text = "Find the Black Key to open the Door.";
-                    keypad.SetActive(false);
+                    TurnOffKeyPad();
                 }
                 else if (inventory_manager.HasItem("BlackKey") && hit.collider.gameObject.transform.parent.gameObject.name == "Door1")
                 {
@@ -140,7 +147,7 @@ public class Interectable : MonoBehaviour
                 if (!inventory_manager.HasItem("SilverKey") && hit.collider.gameObject.transform.parent.gameObject.name == "Door2")
                 {
                     reminder.text = "Find the Silver Key to open the Door.";
-                    keypad.SetActive(false);
+                    TurnOffKeyPad();
                 }
                 else if (inventory_manager.HasItem("SilverKey") && hit.collider.gameObject.transform.parent.gameObject.name == "Door2")
                 {
@@ -151,10 +158,14 @@ public class Interectable : MonoBehaviour
                 {
                     reminder.text = "Input the password to open the door";
                     keypad.SetActive(true);
+
+                    Cursor.lockState = CursorLockMode.None;
+                    Cursor.visible = true; 
+
                 }
                 else if (hit.collider.gameObject.transform.parent.gameObject.name != "PasswordDoor")
                 {
-                    keypad.SetActive(false);
+                    TurnOffKeyPad();
                 }
 
                 // Check if E is pressed down

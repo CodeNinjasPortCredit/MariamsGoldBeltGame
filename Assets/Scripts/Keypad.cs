@@ -33,6 +33,7 @@ public class Keypad : MonoBehaviour
             Ans.text = "Correct";
             Door.SetBool("Open", true);
             gameObject.SetActive(false);
+            Destroy(gameObject); 
             //Door.rbDoor.AddRelativeTorque(new Vector3(0, 0, 20f));
         }
         else

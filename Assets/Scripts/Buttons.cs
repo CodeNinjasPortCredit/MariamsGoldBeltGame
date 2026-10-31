@@ -19,6 +19,8 @@ public class Buttons : MonoBehaviour
 
     public GameObject MenuButton;
     public GameObject StartButton;
+    public GameObject CreditsButton;
+    public GameObject TitleText;
 
     public Interectable interactable;
 
@@ -30,19 +32,23 @@ public class Buttons : MonoBehaviour
     {
         SceneManager.LoadScene("Menu");
     }
+    public void LoadCreditScene()
+    {
+        SceneManager.LoadScene("Credit Scene");
+    }
 
     public void LoadGamePlay()
     {
         // Finalize this: Either load the gameplay directly or the start scene
         // SceneManager.LoadScene("New Gameplay");
-        SceneManager.LoadScene("New Gameplay (Jacky)");
+        SceneManager.LoadScene("Newest Gameplay");
     }
 
     public void LoadStart()
     {
         // Finalize this: Either load the gameplay directly or the start scene
         // SceneManager.LoadScene("Start Scene");
-        SceneManager.LoadScene("New Gameplay (Jacky)");
+        SceneManager.LoadScene("Newest Gameplay");
     }
 
     public void LoadLeaderboard()
@@ -57,8 +63,13 @@ public class Buttons : MonoBehaviour
         gameplayCamera.Follow = BobBody.transform;
         TimerText.SetActive(true);
         MenuButton.SetActive(false);
-        StartButton.SetActive(false);  
+        StartButton.SetActive(false);
+        CreditsButton.SetActive(false);
+        TitleText.SetActive(false);
         Guard.SetActive(false);
         interactable.started = true;
+        Cursor.lockState = CursorLockMode.Locked; // freeze
+                                                  // on screen centre
+        Cursor.visible = false; // invisible cursor 
     }
 }

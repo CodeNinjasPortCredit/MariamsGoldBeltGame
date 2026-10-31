@@ -7,7 +7,7 @@ public class SimpleCameraControl : MonoBehaviour
     Vector3 moveDir = Vector3.zero; float rotX = 0;
     void Start()
     {
-        Cursor.visible = false;
+ 
     }
     void Update()
     {

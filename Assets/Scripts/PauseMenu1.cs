@@ -24,10 +24,14 @@ public class PauseMenu1 : MonoBehaviour
             if(isPaused)
             {
                 ResumeGame();
+                Cursor.lockState = CursorLockMode.Locked;
+                Cursor.visible = false;
             }
             else
             {
                 PauseGame();
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
             }
         }
     }
@@ -44,6 +48,8 @@ public class PauseMenu1 : MonoBehaviour
         pauseMenu.SetActive(false);
         Time.timeScale = 1f;
         isPaused = false;
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
     public void Exit()
     {
