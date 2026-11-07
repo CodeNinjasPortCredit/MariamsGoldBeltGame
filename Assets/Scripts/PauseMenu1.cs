@@ -56,6 +56,6 @@ public class PauseMenu1 : MonoBehaviour
         Time.timeScale = 1f;
         // Finalize this: Either load the gameplay directly or the start scene
         // SceneManager.LoadScene(0);
-        SceneManager.LoadScene("New Gameplay (Jacky)");
+        SceneManager.LoadScene("Newest Gameplay");
     }
 }
