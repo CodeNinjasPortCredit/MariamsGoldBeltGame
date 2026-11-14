@@ -28,10 +28,18 @@ public class Buttons : MonoBehaviour
 
     public GameObject ReminderName;
 
-       public void LoadMenu()
+    public void Start()
+    {
+        if (SceneManager.GetActiveScene().name == "Lazer Game Over" || SceneManager.GetActiveScene().name == "Game Over (caught)")
+        {
+            Invoke("LoadGamePlay", 2f);
+        }
+    }
+    public void LoadMenu()
     {
         SceneManager.LoadScene("Menu");
     }
+
     public void LoadCreditScene()
     {
         SceneManager.LoadScene("Credit Scene");
