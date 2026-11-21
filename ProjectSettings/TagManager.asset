@@ -11,6 +11,8 @@ TagManager:
   - Wrench
   - Door1
   - Police
+  - Tile
+  - Basketball
   layers:
   - Default
   - TransparentFX

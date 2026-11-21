@@ -9,11 +9,6 @@ public class Buttons : MonoBehaviour
 {
     // Newly Added
     public GameObject HintPanel;
-    public CinemachineVirtualCamera gameplayCamera;
-
-    public GameObject BobBody;
-
-    public GameObject BobMainCamera;
 
     public GameObject TimerText;
 
@@ -68,13 +63,13 @@ public class Buttons : MonoBehaviour
     public void StartGameplay() {
       
         HintPanel.SetActive(true);
-        gameplayCamera.Follow = BobBody.transform;
         TimerText.SetActive(true);
         MenuButton.SetActive(false);
         StartButton.SetActive(false);
         CreditsButton.SetActive(false);
         TitleText.SetActive(false);
-        Guard.SetActive(false);
+        
+        // Guard.SetActive(false);
         interactable.started = true;
         Cursor.lockState = CursorLockMode.Locked; // freeze
                                                   // on screen centre

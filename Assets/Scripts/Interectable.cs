@@ -33,6 +33,9 @@ public class Interectable : MonoBehaviour
     [Header("KeyPad UI")]
     public GameObject keypad;
 
+    [Header("Basketball")]
+    public BasketballShooter basketballShooter;
+
     public float radius;
 
     public bool started = false;
@@ -156,8 +159,21 @@ public class Interectable : MonoBehaviour
 
                 if (hit.collider.gameObject.transform.parent.gameObject.name == "PasswordDoor")
                 {
-                    reminder.text = "Input the password to open the door";
-                    keypad.SetActive(true);
+
+                    if (hit.collider.gameObject.transform.parent.gameObject.GetComponent<Animator>().GetBool("Open")) {
+                        if (keypad)
+                        {
+                            keypad.SetActive(false);
+                        }
+                        return;
+                    }
+                    else {
+                        reminder.text = "Input the password to open the door";
+                        if (keypad)
+                        {
+                            keypad.SetActive(true);
+                        }
+                    }
 
                     Cursor.lockState = CursorLockMode.None;
                     Cursor.visible = true; 
@@ -211,6 +227,18 @@ public class Interectable : MonoBehaviour
                         hit.collider.gameObject.GetComponent<IInteractable>().Interact();
                         gameObject.GetComponent<Interactor>().inventory.Add(hit.collider.gameObject.GetComponent<IInteractable>());
 
+                    }
+                }
+                else if (hit.collider.tag == "Basketball")
+                {
+                    reminder.text = "Press E to pick up Basketball";
+
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        if (basketballShooter != null)
+                            basketballShooter.EnableShooting();
+
+                        hit.collider.gameObject.SetActive(false);
                     }
                 }
             }
